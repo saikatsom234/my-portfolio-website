@@ -391,12 +391,22 @@ if (certTrack) {
             const windowCenter = window.innerHeight / 2;
             
             // Calculate distance relative to viewport height
-            // When perfectly centered, dist is 0
             const dist = sectionCenter - windowCenter;
+            const absDist = Math.abs(dist);
             
-            // Map the distance to a rotation degree
-            // Multiply by a high number (e.g. 1440) for a rapid coin-spin effect
-            const rotateDeg = (dist / window.innerHeight) * 1440;
+            let rotateDeg = 0;
+            
+            // Set a threshold (15% of viewport height).
+            // When inside this threshold (the section is centered on screen), the photo stays still (0deg).
+            // When scrolling out of it, the photo spins like a coin (up to 720 degrees / 2 full spins).
+            const threshold = window.innerHeight * 0.15;
+            if (absDist > threshold) {
+                const factor = (absDist - threshold) / (window.innerHeight - threshold);
+                const direction = dist > 0 ? 1 : -1;
+                rotateDeg = direction * Math.min(1, factor) * 720;
+            } else {
+                rotateDeg = 0;
+            }
             
             // Apply the transform (perspective adds a 3D depth effect)
             aboutPhoto.style.transform = `perspective(1000px) rotateY(${rotateDeg}deg)`;
@@ -421,8 +431,9 @@ if (certTrack) {
             // When scrolled away (scrollFactor=1) -> wide spread (1.0)
             const spread = 0.3 + (0.7 * scrollFactor);
             
-            const translateX = offset * 350 * spread; 
-            const translateY = offset * 220 * spread; 
+            const isMobile = window.innerWidth <= 768;
+            const translateX = offset * (isMobile ? 220 : 350) * spread; 
+            const translateY = offset * (isMobile ? 140 : 220) * spread; 
             const rotate = offset * 15 * spread; 
             const scale = Math.max(0.5, 1 - absOffset * 0.15); 
             const opacity = Math.max(0, 1 - absOffset * 0.4);
@@ -678,11 +689,15 @@ function initSpotlightNav() {
     // Hamburger logic
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('.spotlight-nav');
+    const logo = document.querySelector('.logo');
     
     if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             nav.classList.toggle('active');
+            if (logo) {
+                logo.classList.toggle('logo-hidden');
+            }
         });
         
         // Close menu when clicking a link
@@ -690,6 +705,9 @@ function initSpotlightNav() {
             item.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 nav.classList.remove('active');
+                if (logo) {
+                    logo.classList.remove('logo-hidden');
+                }
             });
         });
     }
