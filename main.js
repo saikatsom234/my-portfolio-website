@@ -355,15 +355,15 @@ if (certTrack) {
     const dots = Array.from(certDotsContainer.querySelectorAll('.carousel-dot'));
     
     const certificateData = [
-        { title: "Programming in Java", desc: "Successfully completed the 12-week NPTEL Online Certification course on Programming in Java (IIT Kharagpur) with 78%.", file: "certificates/programing in JAVA (NPTEL).pdf" },
-        { title: "Computer Architecture", desc: "Completed the 12-week NPTEL course on Computer Architecture funded by the Govt. of India (IIT Madras).", file: "certificates/Computer Architecture (NPTEL).pdf" },
-        { title: "Cyber Security Training", desc: "Successfully completed 36 hours of rigorous training in Cyber Security by Ardent Computech Pvt. Ltd.", file: "certificates/cyber security BCT TRAINING.pdf" },
-        { title: "Deloitte Data Analytics", desc: "Completed practical tasks in Data Analysis and Forensic Technology during the Deloitte Job Simulation.", file: "certificates/Deloitte_Data_Analytics_Job_Simulation_completion_certificate.pdf" },
-        { title: "Google Cloud Platform", desc: "Completed Introduction to Google Cloud Platform course by Simplilearn, deepening cloud computing skills.", file: "certificates/skillup_simplilearn_google cloud_certificate.pdf" },
-        { title: "GenAI Powered Analytics", desc: "Completed practical Job Simulation on GenAI Powered Data Analytics provided by TATA.", file: "certificates/TATA certificate GenAI Powered Data Analytics Job Simulation.pdf" },
-        { title: "TATA ESG Simulation", desc: "Gained practical experience and skills through the TATA ESG Job Simulation program.", file: "certificates/TATA_CERTIFICTE_ESG_completion_certificate.pdf" },
-        { title: "Cybersecurity Analyst", desc: "Completed practical tasks as part of the rigorous TATA Cybersecurity Analyst Job Simulation.", file: "certificates/TATA_CERTIFIOCATE_Cybersecurity Analyst Job Simulation_completion_certificate.pdf" },
-        { title: "TATA Data Visualisation", desc: "Gained practical skills in Data Visualisation and reporting through the TATA Job Simulation.", file: "certificates/TATA_Data Visualisation_completion_certificate.pdf" }
+        { title: "Programming in Java", desc: "Successfully completed the 12-week NPTEL Online Certification course on Programming in Java (IIT Kharagpur) with 78%.", file: "certificates/programing in JAVA (NPTEL).pdf", image: "certificates/pic/programing in JAVA (NPTEL)_page-0001.jpg" },
+        { title: "Computer Architecture", desc: "Completed the 12-week NPTEL course on Computer Architecture funded by the Govt. of India (IIT Madras).", file: "certificates/Computer Architecture (NPTEL).pdf", image: "certificates/pic/Computer Architecture (NPTEL)_page-0001.jpg" },
+        { title: "Cyber Security Training", desc: "Successfully completed 36 hours of rigorous training in Cyber Security by Ardent Computech Pvt. Ltd.", file: "certificates/cyber security BCT TRAINING.pdf", image: "certificates/pic/cyber security BCT TRAINING_page-0001 - Copy.jpg" },
+        { title: "Deloitte Data Analytics", desc: "Completed practical tasks in Data Analysis and Forensic Technology during the Deloitte Job Simulation.", file: "certificates/Deloitte_Data_Analytics_Job_Simulation_completion_certificate.pdf", image: "certificates/pic/Deloitte_Data_Analytics_Job_Simulation_completion_certificate_page-0001.jpg" },
+        { title: "Google Cloud Platform", desc: "Completed Introduction to Google Cloud Platform course by Simplilearn, deepening cloud computing skills.", file: "certificates/skillup_simplilearn_google cloud_certificate.pdf", image: "certificates/pic/skillup_simplilearn_google cloud_certificate_page-0001.jpg" },
+        { title: "GenAI Powered Analytics", desc: "Completed practical Job Simulation on GenAI Powered Data Analytics provided by TATA.", file: "certificates/TATA certificate GenAI Powered Data Analytics Job Simulation.pdf", image: "certificates/pic/TATA certificate GenAI Powered Data Analytics Job Simulation_page-0001.jpg" },
+        { title: "TATA ESG Simulation", desc: "Gained practical experience and skills through the TATA ESG Job Simulation program.", file: "certificates/TATA_CERTIFICTE_ESG_completion_certificate.pdf", image: "certificates/pic/TATA_CERTIFICTE_ESG_completion_certificate_page-0001.jpg" },
+        { title: "Cybersecurity Analyst", desc: "Completed practical tasks as part of the rigorous TATA Cybersecurity Analyst Job Simulation.", file: "certificates/TATA_CERTIFIOCATE_Cybersecurity Analyst Job Simulation_completion_certificate.pdf", image: "certificates/pic/TATA_CERTIFIOCATE_Cybersecurity Analyst Job Simulation_completion_certificate_page-0001.jpg" },
+        { title: "TATA Data Visualisation", desc: "Gained practical skills in Data Visualisation and reporting through the TATA Job Simulation.", file: "certificates/TATA_Data Visualisation_completion_certificate.pdf", image: "certificates/pic/TATA_Data Visualisation_completion_certificate_page-0001.jpg" }
     ];
 
     let scrollFactor = 0; // Default to 0 (centered) on load if centered
@@ -447,12 +447,12 @@ if (certTrack) {
             if (!card.innerHTML.trim()) {
                 const cert = certificateData[i] || certificateData[0];
                 card.innerHTML = `
-                    <iframe src="${encodeURI(cert.file)}#toolbar=0&navpanes=0&scrollbar=0&view=Fit" class="cert-image-slot" style="border:none; pointer-events:none; overflow:hidden;"></iframe>
+                    <img src="${encodeURI(cert.image)}" class="cert-image-slot" alt="${cert.title}" style="object-fit: contain; background: rgba(0, 0, 0, 0.25); border: none;" />
                     <h3 class="cert-title">${cert.title}</h3>
                     <p class="cert-desc">${cert.desc}</p>
-                    <a href="https://www.linkedin.com/in/saikat-som-288477418/details/certifications/" target="_blank" class="cert-btn btn-gradient" style="text-decoration: none; color: #fff;">
-                        READ MORE
-                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    <a href="${encodeURI(cert.file)}" download="${cert.title}.pdf" class="cert-btn btn-gradient" style="text-decoration: none; color: #fff;">
+                        DOWNLOAD PDF
+                        <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     </a>
                 `;
             }
